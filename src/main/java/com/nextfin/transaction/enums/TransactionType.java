@@ -1,4 +1,4 @@
-package com.nextfin.executor.enums;
+package com.nextfin.transaction.enums;
 
 public enum TransactionType {
     INSTANT, SCHEDULED, RECURRING

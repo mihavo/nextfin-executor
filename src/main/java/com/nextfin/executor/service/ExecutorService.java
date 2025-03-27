@@ -1,6 +1,6 @@
 package com.nextfin.executor.service;
 
-import com.nextfin.executor.entity.Transaction;
+import com.nextfin.transaction.entity.Transaction;
 
 public interface ExecutorService {
     /**

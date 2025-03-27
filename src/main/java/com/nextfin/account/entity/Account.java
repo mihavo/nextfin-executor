@@ -1,7 +1,7 @@
-package com.nextfin.executor.entity;
+package com.nextfin.account.entity;
 
-import com.nextfin.executor.enums.AccountStatus;
-import com.nextfin.executor.enums.AccountType;
+import com.nextfin.account.enums.AccountStatus;
+import com.nextfin.account.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;

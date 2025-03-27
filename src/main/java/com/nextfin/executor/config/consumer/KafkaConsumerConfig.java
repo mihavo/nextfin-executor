@@ -1,6 +1,6 @@
 package com.nextfin.executor.config.consumer;
 
-import com.nextfin.executor.entity.Transaction;
+import com.nextfin.transaction.entity.Transaction;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +19,9 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
+    @Value(value = "${spring.kafka.bootstrap-servers}")
+    private String bootstrapAddress;
+
     @Value("spring.kafka.consumer-group-id")
     private String groupId;
 
@@ -26,7 +29,10 @@ public class KafkaConsumerConfig {
     public ConsumerFactory<String, Transaction> transactionConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(Transaction.class));
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        JsonDeserializer<Transaction> deserializer = new JsonDeserializer<>(Transaction.class);
+        deserializer.addTrustedPackages("com.nextfin.*");
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), deserializer);
     }
 
     @Bean

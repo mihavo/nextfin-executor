@@ -1,8 +1,9 @@
-package com.nextfin.executor.entity;
+package com.nextfin.transaction.entity;
 
 
-import com.nextfin.executor.enums.TransactionStatus;
-import com.nextfin.executor.enums.TransactionType;
+import com.nextfin.account.entity.Account;
+import com.nextfin.transaction.enums.TransactionStatus;
+import com.nextfin.transaction.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

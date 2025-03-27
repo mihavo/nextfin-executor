@@ -1,6 +1,6 @@
-package com.nextfin.executor.repository;
+package com.nextfin.transaction.repository;
 
-import com.nextfin.executor.entity.Transaction;
+import com.nextfin.transaction.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

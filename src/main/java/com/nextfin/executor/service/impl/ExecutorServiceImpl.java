@@ -1,7 +1,7 @@
 package com.nextfin.executor.service.impl;
 
-import com.nextfin.executor.entity.Transaction;
 import com.nextfin.executor.service.ExecutorService;
+import com.nextfin.transaction.entity.Transaction;
 
 public class ExecutorServiceImpl implements ExecutorService {
     @Override
