@@ -1,13 +1,13 @@
-package com.nextfin.executor;
+package com.nextfin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NextfinExecutorApplication {
+public class NextfinExecutorApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(NextfinExecutorApplication.class, args);
+        SpringApplication.run(NextfinExecutorApp.class, args);
     }
 
 }
