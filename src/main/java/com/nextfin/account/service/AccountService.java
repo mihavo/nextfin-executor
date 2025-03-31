@@ -52,7 +52,7 @@ public class AccountService {
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                                                   messageSource.getMessage("account.notfound", new Long[]{accountId},
                                                                            LocaleContextHolder.getLocale())));
-        log.debug("Account fetched: {}", account);
+        log.trace("Account fetched: {}", account);
         return account;
     }
 }
