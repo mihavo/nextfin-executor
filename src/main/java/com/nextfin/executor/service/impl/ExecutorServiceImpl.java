@@ -27,14 +27,14 @@ public class ExecutorServiceImpl implements ExecutorService {
     private final CurrencyConverterService currencyConverter;
 
     @Override
-    public Transaction process(Transaction transaction) {
+    public void process(Transaction transaction) {
         transaction.setTransactionStatus(TransactionStatus.PROCESSING);
         transactionRepository.save(transaction);
         log.debug("Transaction with id {} submitted for processing", transaction.getId());
         execute(transaction);
         log.debug("Transaction with id {} completed", transaction.getId());
         transaction.setTransactionStatus(TransactionStatus.COMPLETED);
-        return transactionRepository.save(transaction);
+        transactionRepository.save(transaction);
     }
 
     private void execute(Transaction transaction) {

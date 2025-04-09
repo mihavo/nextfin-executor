@@ -17,6 +17,6 @@ public class TransactionListener {
     @KafkaListener(topics = "transactions")
     public void listen(Transaction transaction) {
         log.debug("Received transaction " + transaction.getId() + " for processing.");
-        Transaction result = executorService.process(transaction);
+        executorService.process(transaction);
     }
 }
