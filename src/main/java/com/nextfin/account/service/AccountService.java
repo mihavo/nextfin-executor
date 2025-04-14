@@ -4,6 +4,7 @@ import com.nextfin.account.dto.DepositDto;
 import com.nextfin.account.dto.WithdrawDto;
 import com.nextfin.account.entity.Account;
 import com.nextfin.account.repository.AccountRepository;
+import com.nextfin.transaction.entity.Transaction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -54,5 +55,12 @@ public class AccountService {
                                                                            LocaleContextHolder.getLocale())));
         log.trace("Account fetched: {}", account);
         return account;
+    }
+
+    public void finalizeTransaction(Transaction transaction) {
+        Account sourceAccount = transaction.getSourceAccount();
+        BigDecimal newTotal = sourceAccount.getDailyTotal().add(transaction.getAmount());
+        sourceAccount.setDailyTotal(newTotal);
+        accountRepository.save(sourceAccount);
     }
 }

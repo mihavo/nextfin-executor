@@ -35,6 +35,7 @@ public class ExecutorServiceImpl implements ExecutorService {
         log.debug("Transaction with id {} completed", transaction.getId());
         transaction.setTransactionStatus(TransactionStatus.COMPLETED);
         transactionRepository.save(transaction);
+        accountService.finalizeTransaction(transaction);
     }
 
     private void execute(Transaction transaction) {

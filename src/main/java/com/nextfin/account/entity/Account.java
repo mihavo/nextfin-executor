@@ -41,11 +41,14 @@ public class Account {
     @Enumerated
     @Builder.Default
     private AccountType accountType = AccountType.SAVINGS;
-
-
+    
     @Column(name = "transaction_limit")
     @Builder.Default
     Long transactionLimit = 1000L;
+    
+    @Column(name = "daily_total")
+    @Builder.Default
+    BigDecimal dailyTotal = BigDecimal.ZERO;
 
 
 }
