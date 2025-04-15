@@ -37,12 +37,18 @@ public class Transaction {
     private Currency currency;
 
     @ManyToOne
-    @JoinColumn(name = "source_account_id", nullable = false)
+    @JoinColumn(name = "source_account_id", insertable = false, updatable = false, nullable = false)
     private Account sourceAccount;
 
+    @Column(name = "source_account_id", nullable = false)
+    private Long sourceAccountId;
+
     @ManyToOne
-    @JoinColumn(name = "target_account_id", nullable = false)
+    @JoinColumn(name = "target_account_id", insertable = false, updatable = false, nullable = false)
     private Account targetAccount;
+
+    @Column(name = "target_account_id", nullable = false)
+    private Long targetAccountId;
 
     @Enumerated
     @Column(name = "transaction_status", nullable = false)

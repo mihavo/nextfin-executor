@@ -39,8 +39,8 @@ public class ExecutorServiceImpl implements ExecutorService {
     }
 
     private void execute(Transaction transaction) {
-        Account sourceAccount = transaction.getSourceAccount();
-        Account targetAccount = transaction.getTargetAccount();
+        Account sourceAccount = accountService.getAccount(transaction.getSourceAccountId());
+        Account targetAccount = accountService.getAccount(transaction.getTargetAccountId());
         Currency requestCurrency = transaction.getCurrency();
         BigDecimal amount = transaction.getAmount();
         //Convert amount to target & source account's default currency
@@ -48,7 +48,7 @@ public class ExecutorServiceImpl implements ExecutorService {
                                                                                sourceAccount.getCurrency(),
                                                                                targetAccount.getCurrency());
 
-        accountService.withdrawAmount(sourceAccount.getId(), new WithdrawDto(targetAmounts.a));
-        accountService.depositAmount(targetAccount.getId(), new DepositDto(targetAmounts.b));
+        accountService.withdrawAmount(sourceAccount, new WithdrawDto(targetAmounts.a));
+        accountService.depositAmount(targetAccount, new DepositDto(targetAmounts.b));
     }
 }

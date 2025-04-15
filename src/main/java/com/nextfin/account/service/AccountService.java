@@ -25,16 +25,14 @@ public class AccountService {
     private final MessageSource messageSource;
 
 
-    public BigDecimal depositAmount(Long accountId, DepositDto dto) {
-        Account account = getAccount(accountId);
+    public BigDecimal depositAmount(Account account, DepositDto dto) {
         account.setBalance(account.getBalance().add(dto.amount()));
         accountRepository.save(account);
         log.debug("Account {} deposited with amount {}", account, dto.amount());
         return account.getBalance();
     }
 
-    public BigDecimal withdrawAmount(Long accountId, WithdrawDto dto) {
-        Account account = getAccount(accountId);
+    public BigDecimal withdrawAmount(Account account, WithdrawDto dto) {
         BigDecimal balance = account.getBalance();
         BigDecimal withdrawAmount = dto.amount();
         if (balance.compareTo(withdrawAmount) < 0) {
@@ -58,7 +56,7 @@ public class AccountService {
     }
 
     public void finalizeTransaction(Transaction transaction) {
-        Account sourceAccount = transaction.getSourceAccount();
+        Account sourceAccount = getAccount(transaction.getSourceAccountId());
         BigDecimal newTotal = sourceAccount.getDailyTotal().add(transaction.getAmount());
         sourceAccount.setDailyTotal(newTotal);
         accountRepository.save(sourceAccount);
